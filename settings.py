@@ -1,5 +1,7 @@
 import os
 
+ID_LENGTH = 6
+
 
 class Config(object):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')

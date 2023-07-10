@@ -1,48 +1,42 @@
-import random
-import string
+from http import HTTPStatus
 
-from flask import abort, flash, redirect, render_template, url_for
+from flask import abort, flash, redirect, render_template
 
 from . import app, db
 from .forms import URLMapForm
 from .models import URLMap
-
-DEFAULT_ID_LENGTH = 6
-
-
-def get_unique_short_id():
-    char_set = string.ascii_lowercase + string.ascii_lowercase + string.digits
-    short_id = ''.join(random.choices(char_set, k=DEFAULT_ID_LENGTH))
-    return short_id
+from .utils import get_unique_short_id
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index_view():
     form = URLMapForm()
     if form.validate_on_submit():
+        original = form.original_link.data
         short = form.custom_id.data
-        if short is '':
-            short = get_unique_short_id()
-
-        url_map = URLMap(
-            original=form.original_link.data,
-            short=short
-        )
 
         if URLMap.query.filter_by(short=short).first():
             flash(f'Имя {short} уже занято!')
             return render_template('index.html', form=form)
 
-        db.session.add(url_map)
+        if not short:
+            short = get_unique_short_id()
+
+        url_map_obj = URLMap(
+            original=original,
+            short=short
+        )
+
+        db.session.add(url_map_obj)
         db.session.commit()
-        return render_template('index.html', short=url_map.short, form=form)
+        return render_template('index.html', short=short, form=form)
     return render_template('index.html', form=form)
 
 
-@app.route('/<short>')
+@app.get('/<short>')
 def forwarding_view(short):
     url_map_obj = URLMap.query.filter_by(short=short).first()
     if url_map_obj is None:
-        abort(404)
+        abort(HTTPStatus.NOT_FOUND)
     original_link = url_map_obj.original
     return redirect(original_link)

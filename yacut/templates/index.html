@@ -64,7 +64,7 @@
           <p class="text-center">
             {% if short %}
               <h5 class="text-center">
-                Ваша новая ссылка готова: <a href="{{ url_for('index_view', short=short, _external=True) }}">{{ url_for('index_view', short=short, _external=True) }}</a>
+                Ваша новая ссылка готова: <a href="{{ url_for('forwarding_view', short=short, _external=True) }}">{{ url_for('forwarding_view', short=short, _external=True) }}</a>
               </h5>
             {% endif %}
           </p>

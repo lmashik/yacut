@@ -28,7 +28,7 @@ def create_id():
 
     original = data['url']
 
-    if data.get('custom_id') is None or data.get('custom_id') == '':
+    if not data.get('custom_id'):
         data['custom_id'] = get_unique_short_id()
 
     short = data['custom_id']

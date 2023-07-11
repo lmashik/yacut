@@ -8,10 +8,6 @@ class URLMapForm(FlaskForm):
         'Длинная ссылка',
         validators=(
             DataRequired(message='Обязательное поле'),
-            Length(
-                1, 256,
-                message='Длина ссылки должна быть не более 256 символов'
-            ),
             URL(message='Некорректный URL')
         )
     )

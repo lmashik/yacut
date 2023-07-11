@@ -35,8 +35,6 @@ def index_view():
 
 @app.get('/<short>')
 def forwarding_view(short):
-    url_map_obj = URLMap.query.filter_by(short=short).first()
-    if url_map_obj is None:
-        abort(HTTPStatus.NOT_FOUND)
+    url_map_obj = URLMap.query.filter_by(short=short).first_or_404()
     original_link = url_map_obj.original
     return redirect(original_link)

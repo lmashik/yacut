@@ -51,7 +51,3 @@ def create_id():
         )
     }
     return jsonify(response), HTTPStatus.CREATED
-
-
-
-

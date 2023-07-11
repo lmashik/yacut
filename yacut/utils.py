@@ -1,7 +1,7 @@
 import random
 import string
 
-from settings import DEFAULT_ID_LENGTH
+from .constants import DEFAULT_ID_LENGTH
 from .models import URLMap
 
 

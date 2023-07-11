@@ -1,8 +1,8 @@
 import re
 from datetime import datetime
 
-from settings import ID_PATTERN
 from . import db
+from .constants import ID_PATTERN
 
 
 class URLMap(db.Model):

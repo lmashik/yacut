@@ -28,19 +28,19 @@ git clone https://github.com/lmashik/yacut.git
 
 2. Создайте и активируйте виртуальное окружение
 ```bash
-python3 -m venv env
+python3.7 -m venv venv
 ```
 
 * Если у вас Linux/macOS
 
     ```bash
-    source env/bin/activate
+    source venv/bin/activate
     ```
 
 * Если у вас windows
 
     ```bash
-    source env/scripts/activate
+    source venv/scripts/activate
     ```
 
 3. Обновите pip до последней версии
@@ -120,4 +120,4 @@ _HTTP 1.1 200 OK_
 ## Автор проекта
 
 Лапикова Мария Дмитриевна
-mashik.mikhaylova@yandex.ru
+mashik_p@mail.ru
